@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import logo1 from "../assets/Logo-1.png";
 import { Feather } from "@expo/vector-icons";
@@ -27,7 +28,6 @@ const Screen1 = () => {
       updateLayout
     );
 
-    // Cleanup function to remove the event listener when unmounting
     return () => {
       dimensionListener.remove();
     };
@@ -43,6 +43,10 @@ const Screen1 = () => {
     ? styles.portraitArrow
     : styles.landscapeArrow;
 
+  const handleButtonClick = () => {
+    alert("Button clicked!");
+  };
+
   return (
     <View style={[styles.container, commonContainerStyle]}>
       <View style={commonGridStyle}>
@@ -51,6 +55,13 @@ const Screen1 = () => {
           <Text style={styles.paragraph}>
             Lorem ipsum dolor sit amet {"\n"}consectetur adipisicing elit.
           </Text>
+          <TouchableOpacity onPress={handleButtonClick}>
+            <View style={styles.buttonContainer}>
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>Test</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
           <View style={[styles.arrowContainer, arrowPosition]}>
             <Feather name="chevron-right" size={50} />
           </View>
@@ -109,6 +120,22 @@ const styles = StyleSheet.create({
   paragraph: {
     fontSize: 20,
     fontWeight: "300",
+  },
+  buttonContainer: {
+    alignSelf: "flex-start",
+    marginTop: 10,
+    width: 150,
+  },
+  button: {
+    borderRadius: 5,
+    backgroundColor: "#F78FB3",
+    padding: 10,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
   },
   imageContainer: {
     flex: 1,
