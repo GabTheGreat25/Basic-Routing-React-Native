@@ -4,13 +4,21 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Slide1 from "./components/slide1";
 import Slide2 from "./components/slide2";
 import Slide3 from "./components/slide3";
+import Screen1 from "./components/screen1";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="slide1">
+      <Stack.Navigator initialRouteName="Screen1">
+        <Stack.Screen
+          name="Screen1"
+          component={Screen1}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+      {/* <Stack.Navigator initialRouteName="slide1">
         <Stack.Screen
           name="slide1"
           component={Slide1}
@@ -26,7 +34,7 @@ export default function App() {
           component={Slide3}
           options={{ headerShown: false }}
         />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
     </NavigationContainer>
   );
 }
