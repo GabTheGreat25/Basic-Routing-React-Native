@@ -56,7 +56,7 @@ export default function Screen1() {
     <View style={[styles.container, commonContainerStyle]}>
       <View style={commonGridStyle}>
         <View style={[styles.textContainer, textPosition]}>
-          <Text style={styles.heading}>Become a Lanlee Employee?</Text>
+          <Text style={styles.heading}>Looking for a salon? </Text>
           <Text style={styles.paragraph}>
             Lorem ipsum dolor sit amet {"\n"}consectetur adipisicing elit.
           </Text>
