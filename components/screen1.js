@@ -10,8 +10,10 @@ import {
 } from "react-native";
 import logo1 from "../assets/Logo-1.png";
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-const Screen1 = () => {
+export default function Screen1() {
+  const navigation = useNavigation();
   const [isPortrait, setIsPortrait] = useState(
     Dimensions.get("window").height > Dimensions.get("window").width
   );
@@ -39,9 +41,12 @@ const Screen1 = () => {
   const commonGridStyle = isPortrait
     ? styles.portraitGrid
     : styles.landscapeGrid;
-  const arrowPosition = isPortrait
-    ? styles.portraitArrow
-    : styles.landscapeArrow;
+  const arrowRightPosition = isPortrait
+    ? styles.portraitRightArrow
+    : styles.landscapeRightArrow;
+  const textPosition = isPortrait
+    ? styles.textPortraitContainer
+    : styles.textLandscapeContainer;
 
   const handleButtonClick = () => {
     alert("Button clicked!");
@@ -50,21 +55,24 @@ const Screen1 = () => {
   return (
     <View style={[styles.container, commonContainerStyle]}>
       <View style={commonGridStyle}>
-        <View style={styles.textContainer}>
-          <Text style={styles.heading}>Looking for a salon?</Text>
+        <View style={[styles.textContainer, textPosition]}>
+          <Text style={styles.heading}>Become a Lanlee Employee?</Text>
           <Text style={styles.paragraph}>
             Lorem ipsum dolor sit amet {"\n"}consectetur adipisicing elit.
           </Text>
           <TouchableOpacity onPress={handleButtonClick}>
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
-                <Text style={styles.buttonText}>Test</Text>
+                <Text style={styles.buttonText}>Learn More</Text>
               </View>
             </View>
           </TouchableOpacity>
-          <View style={[styles.arrowContainer, arrowPosition]}>
+          <TouchableOpacity
+            style={[styles.arrowRightContainer, arrowRightPosition]}
+            onPress={() => navigation.navigate("Screen2")}
+          >
             <Feather name="chevron-right" size={50} />
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.imageContainer}>
           {isPortrait ? (
@@ -86,7 +94,7 @@ const Screen1 = () => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -110,7 +118,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "start",
+  },
+  textPortraitContainer: {
     paddingLeft: 20,
+  },
+  textLandscapeContainer: {
+    paddingLeft: 50,
   },
   heading: {
     fontSize: 40,
@@ -141,6 +154,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    zIndex: -1,
   },
   logo: {
     width: "100%",
@@ -154,19 +168,17 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  arrowContainer: {
+  arrowRightContainer: {
     position: "absolute",
     top: "85%",
   },
-  portraitArrow: {
+  portraitRightArrow: {
     left: "75%",
     transform: [{ translateX: 50 }],
   },
-  landscapeArrow: {
+  landscapeRightArrow: {
     left: "160%",
     top: "45%",
     transform: [{ translateX: 100 }],
   },
 });
-
-export default Screen1;
